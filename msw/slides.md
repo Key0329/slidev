@@ -3,7 +3,7 @@
 theme: seriph
 # random image from a curated Unsplash collection by Anthony
 # like them? see https://unsplash.com/collections/94734566/slidev
-background: https://cover.sli.dev
+background: "#aef5ff"
 # some information about your slides (markdown enabled)
 title: Welcome to Slidev
 info: |
@@ -25,46 +25,22 @@ mdc: true
 #  ogImage: https://cover.sli.dev
 ---
 
-# Welcome to Slidev
+# Mock Service Worker
 
-Presentation slides for developers
-
-<div @click="$slidev.nav.next" class="mt-12 py-1" hover:bg="white op-10">
-  Press Space for next page <carbon:arrow-right />
-</div>
-
-<div class="abs-br m-6 text-xl">
-  <button @click="$slidev.nav.openInEditor()" title="Open in Editor" class="slidev-icon-btn">
-    <carbon:edit />
-  </button>
-  <a href="https://github.com/slidevjs/slidev" target="_blank" class="slidev-icon-btn">
-    <carbon:logo-github />
-  </a>
-</div>
-
-<!--
-The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
--->
+<img src="./assets/imgs/logo.png" alt="logo" class="mx-auto w-25 mt-10">
 
 ---
-transition: fade-out
+transition: slide-left
 ---
 
-# What is Slidev?
+# 什麼是 Mock Service Worker (MSW)
 
-Slidev is a slides maker and presenter designed for developers, consist of the following features
+Mock Service Worker 是一個 API 模擬庫，它允許你編寫與客戶端無關的模擬，並在任何框架、工具和環境中重複使用它們。
 
-- 📝 **Text-based** - focus on the content with Markdown, and then style them later
-- 🎨 **Themable** - themes can be shared and re-used as npm packages
-- 🧑‍💻 **Developer Friendly** - code highlighting, live coding with autocompletion
-- 🤹 **Interactive** - embed Vue components to enhance your expressions
-- 🎥 **Recording** - built-in recording and camera view
-- 📤 **Portable** - export to PDF, PPTX, PNGs, or even a hostable SPA
-- 🛠 **Hackable** - virtually anything that's possible on a webpage is possible in Slidev
-<br>
-<br>
-
-Read more about [Why Slidev?](https://sli.dev/guide/why)
+- 用於瀏覽器和 Node.js 的 API 模擬函式庫。
+- 可以攔截傳出的請求、觀察它們並使用模擬回應。
+  <br>
+  <br>
 
 <!--
 You can have `style` tag in markdown to override the style for the current page.
@@ -83,557 +59,487 @@ h1 {
 }
 </style>
 
-<!--
-Here is another comment.
--->
-
 ---
-transition: slide-up
-level: 2
+transition: slide-left
 ---
 
-# Navigation
+# 為什麼有模擬 API 的需求
 
-Hover on the bottom-left corner to see the navigation's controls panel, [learn more](https://sli.dev/guide/ui#navigation-bar)
+## 前後端分離
 
-## Keyboard Shortcuts
+|                                                         |
+| ------------------------------------------------------- |
+| 後端 API 正在開發中，前端想要同時開發                   |
+| 前端想要測試 API 回傳不同結果下，元件的操作邏輯是否正常 |
 
-|                                                     |                             |
-| --------------------------------------------------- | --------------------------- |
-| <kbd>right</kbd> / <kbd>space</kbd>                 | next animation or slide     |
-| <kbd>left</kbd>  / <kbd>shift</kbd><kbd>space</kbd> | previous animation or slide |
-| <kbd>up</kbd>                                       | previous slide              |
-| <kbd>down</kbd>                                     | next slide                  |
-
-<!-- https://sli.dev/guide/animations.html#click-animation -->
-<img
-  v-click
-  class="absolute -bottom-9 -left-7 w-80 opacity-50"
-  src="https://sli.dev/assets/arrow-bottom-left.svg"
-  alt=""
-/>
-<p v-after class="absolute bottom-23 left-45 opacity-30 transform -rotate-10">Here!</p>
+<img src="./assets/imgs/gpt4.png" alt="gpt4" class="ml-auto mr-20 mt-10 w-60">
 
 ---
 layout: two-cols
-layoutClass: gap-16
+transition: slide-left
 ---
 
-# Table of contents
+# 為什麼有模擬 API 的需求
 
-You can use the `Toc` component to generate a table of contents for your slides:
+##
 
-```html
-<Toc minDepth="1" maxDepth="1" />
-```
-
-The title will be inferred from your slide content, or you can override it with `title` and `level` in your frontmatter.
+<div class="mt-20">
+  <p class="text-6">串接的程式先註解</p>
+  </div>
+  <arrow x1="270" y1="180" x2="480" y2="220" color="#953" width="2" arrowSize="1" />
+<div class="mt-20">
+    <p class="text-6">在 api 檔先回傳假資料</p>
+  </div>
+  <arrow x1="300" y1="280" x2="480" y2="320" color="#953" width="2" arrowSize="1" />
 
 ::right::
 
-<Toc text-sm minDepth="1" maxDepth="2" />
+<img src="./assets/imgs/ex1.png" alt="ex1">
 
 ---
-layout: image-right
-image: https://cover.sli.dev
----
 
-# Code
+# 為什麼有模擬 API 的需求
 
-Use code snippets and get the highlighting directly, and even types hover!
+## 寫死假資料可能會有什麼問題
 
-```ts {all|5|7|7-8|10|all} twoslash
-// TwoSlash enables TypeScript hover information
-// and errors in markdown code blocks
-// More at https://shiki.style/packages/twoslash
+<br>
 
-import { computed, ref } from 'vue'
+- 需要對 code 頻繁修改，串接時還需要回去改 api 串接檔
+- 想要模擬不同結果時需要一直回去改假資料
+- 無法模擬 api 狀態錯誤例如：500
+- 不能先撰寫測試
 
-const count = ref(0)
-const doubled = computed(() => count.value * 2)
-
-doubled.value = 2
-```
-
-<arrow v-click="[4, 5]" x1="350" y1="310" x2="195" y2="334" color="#953" width="2" arrowSize="1" />
-
-<!-- This allow you to embed external code blocks -->
-<<< @/snippets/external.ts#snippet
-
-<!-- Footer -->
-
-[Learn more](https://sli.dev/features/line-highlighting)
-
-<!-- Inline style -->
-<style>
-.footnotes-sep {
-  @apply mt-5 opacity-10;
-}
-.footnotes {
-  @apply text-sm opacity-75;
-}
-.footnote-backref {
-  display: none;
-}
-</style>
-
-<!--
-Notes can also sync with clicks
-
-[click] This will be highlighted after the first click
-
-[click] Highlighted with `count = ref(0)`
-
-[click:3] Last click (skip two clicks)
--->
+<img src="./assets/imgs/gpt3.png" alt="gpt3" class="ml-auto mr-20 w-60">
 
 ---
 level: 2
 ---
 
-# Shiki Magic Move
+# 為什麼有模擬 API 的需求
 
-Powered by [shiki-magic-move](https://shiki-magic-move.netlify.app/), Slidev supports animations across multiple code snippets.
+## 如果 Mock API
 
-Add multiple code blocks and wrap them with <code>````md magic-move</code> (four backticks) to enable the magic move. For example:
+<br>
 
-````md magic-move {lines: true}
-```ts {*|2|*}
-// step 1
-const author = reactive({
-  name: 'John Doe',
-  books: [
-    'Vue 2 - Advanced Guide',
-    'Vue 3 - Basic Guide',
-    'Vue 4 - The Mystery'
-  ]
-})
-```
+- 模擬動態回應以提升開發效率，程式運作更符合實際預期
+- 模擬各種網路狀況（延遲、錯誤、特殊 HTTP 狀態等）
+- 藉由修改 mock 的內容，幫助元件或頁面進行除錯。可以模擬如果 API 壞掉的情境
+- 測試可以撰寫各種 HTTP 狀態，或是不同回應資料時的測試案例
+- 前後端雙方也能透過 Mock API 的過程更具體討論實作細節
 
-```ts {*|1-2|3-4|3-4,8}
-// step 2
-export default {
-  data() {
-    return {
-      author: {
-        name: 'John Doe',
-        books: [
-          'Vue 2 - Advanced Guide',
-          'Vue 3 - Basic Guide',
-          'Vue 4 - The Mystery'
-        ]
-      }
-    }
-  }
-}
-```
-
-```ts
-// step 3
-export default {
-  data: () => ({
-    author: {
-      name: 'John Doe',
-      books: [
-        'Vue 2 - Advanced Guide',
-        'Vue 3 - Basic Guide',
-        'Vue 4 - The Mystery'
-      ]
-    }
-  })
-}
-```
-
-Non-code blocks are ignored.
-
-```vue
-<!-- step 4 -->
-<script setup>
-const author = {
-  name: 'John Doe',
-  books: [
-    'Vue 2 - Advanced Guide',
-    'Vue 3 - Basic Guide',
-    'Vue 4 - The Mystery'
-  ]
-}
-</script>
-```
-````
-
----
-
-# Components
-
-<div grid="~ cols-2 gap-4">
-<div>
-
-You can use Vue components directly inside your slides.
-
-We have provided a few built-in components like `<Tweet/>` and `<Youtube/>` that you can use directly. And adding your custom components is also super easy.
-
-```html
-<Counter :count="10" />
-```
-
-<!-- ./components/Counter.vue -->
-<Counter :count="10" m="t-4" />
-
-Check out [the guides](https://sli.dev/builtin/components.html) for more.
-
-</div>
-<div>
-
-```html
-<Tweet id="1390115482657726468" />
-```
-
-<Tweet id="1390115482657726468" scale="0.65" />
-
-</div>
-</div>
+<img src="./assets/imgs/ex2.png" alt="ex2" class="h-50 ml-auto mt-6">
 
 <!--
-Presenter note with **bold**, *italic*, and ~~striked~~ text.
-
-Also, HTML elements are valid:
-<div class="flex w-full">
-  <span style="flex-grow: 1;">Left content</span>
-  <span>Right content</span>
-</div>
+- 模擬動態回應以提升開發效率，並使程式運作更符合實際預期
+- 依專案需要可模擬各種網絡狀況（延遲、錯誤、特殊 HTTP 狀態等）
+- 藉由修改 mock 的內容，幫助元件或頁面進行除錯。可以模擬如果 API 壞掉
+- 進行測試時，可以撰寫各種 HTTP 狀態，或是不同回應資料時的測試案例
+- 前後端雙方也能透過 Mock API 的過程更具體討論實作細節
 -->
 
 ---
-class: px-20
----
 
-# Themes
+# 前端有哪些 mock 的方式
 
-Slidev comes with powerful theming support. Themes can provide styles, layouts, components, or even configurations for tools. Switching between themes by just **one edit** in your frontmatter:
-
-<div grid="~ cols-2 gap-2" m="t-2">
-
-```yaml
----
-theme: default
----
-```
-
-```yaml
----
-theme: seriph
----
-```
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-default/01.png?raw=true" alt="">
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-seriph/01.png?raw=true" alt="">
-
-</div>
-
-Read more about [How to use a theme](https://sli.dev/guide/theme-addon#use-theme) and
-check out the [Awesome Themes Gallery](https://sli.dev/resources/theme-gallery).
-
----
-
-# Clicks Animations
-
-You can add `v-click` to elements to add a click animation.
-
-<div v-click>
-
-This shows up when you click the slide:
-
-```html
-<div v-click>This shows up when you click the slide.</div>
-```
-
-</div>
+## 1. 攔截 Request 請求
 
 <br>
 
-<v-click>
+- 可用套件：Mock.js、axios-mock-adapter
+- 透過攔截 XMLHttpRequest 並覆寫相關方法來達成 Mock 資料回傳。
+- 沒有實際進行真正的網路傳輸
+- 只要是依賴 XMLHttpRequest 方法的套件、工具都不能正常運作
 
-The <span v-mark.red="3"><code>v-mark</code> directive</span>
-also allows you to add
-<span v-mark.circle.orange="4">inline marks</span>
-, powered by [Rough Notation](https://roughnotation.com/):
-
-```html
-<span v-mark.underline.orange>inline markers</span>
-```
-
-</v-click>
-
-<div mt-20 v-click>
-
-[Learn more](https://sli.dev/guide/animations#click-animation)
-
-</div>
+<img src="./assets/imgs/gpt1.png" alt="gpt1" class="ml-auto mr-20 w-50">
 
 ---
 
-# Motions
+# 前端有哪些 mock 的方式
 
-Motion animations are powered by [@vueuse/motion](https://motion.vueuse.org/), triggered by `v-motion` directive.
-
-```html
-<div
-  v-motion
-  :initial="{ x: -80 }"
-  :enter="{ x: 0 }"
-  :click-3="{ x: 80 }"
-  :leave="{ x: 1000 }"
->
-  Slidev
-</div>
-```
-
-<div class="w-60 relative">
-  <div class="relative w-40 h-40">
-    <img
-      v-motion
-      :initial="{ x: 800, y: -100, scale: 1.5, rotate: -50 }"
-      :enter="final"
-      class="absolute inset-0"
-      src="https://sli.dev/logo-square.png"
-      alt=""
-    />
-    <img
-      v-motion
-      :initial="{ y: 500, x: -100, scale: 2 }"
-      :enter="final"
-      class="absolute inset-0"
-      src="https://sli.dev/logo-circle.png"
-      alt=""
-    />
-    <img
-      v-motion
-      :initial="{ x: 600, y: 400, scale: 2, rotate: 100 }"
-      :enter="final"
-      class="absolute inset-0"
-      src="https://sli.dev/logo-triangle.png"
-      alt=""
-    />
-  </div>
-
-  <div
-    class="text-5xl absolute top-14 left-40 text-[#2B90B6] -z-1"
-    v-motion
-    :initial="{ x: -80, opacity: 0}"
-    :enter="{ x: 0, opacity: 1, transition: { delay: 2000, duration: 1000 } }">
-    Slidev
-  </div>
-</div>
-
-<!-- vue script setup scripts can be directly used in markdown, and will only affects current page -->
-<script setup lang="ts">
-const final = {
-  x: 0,
-  y: 0,
-  rotate: 0,
-  scale: 1,
-  transition: {
-    type: 'spring',
-    damping: 10,
-    stiffness: 20,
-    mass: 2
-  }
-}
-</script>
-
-<div
-  v-motion
-  :initial="{ x:35, y: 30, opacity: 0}"
-  :enter="{ y: 0, opacity: 1, transition: { delay: 3500 } }">
-
-[Learn more](https://sli.dev/guide/animations.html#motion)
-
-</div>
-
----
-
-# LaTeX
-
-LaTeX is supported out-of-box. Powered by [KaTeX](https://katex.org/).
-
-<div h-3 />
-
-Inline $\sqrt{3x-1}+(1+x)^2$
-
-Block
-$$ {1|3|all}
-\begin{aligned}
-\nabla \cdot \vec{E} &= \frac{\rho}{\varepsilon_0} \\
-\nabla \cdot \vec{B} &= 0 \\
-\nabla \times \vec{E} &= -\frac{\partial\vec{B}}{\partial t} \\
-\nabla \times \vec{B} &= \mu_0\vec{J} + \mu_0\varepsilon_0\frac{\partial\vec{E}}{\partial t}
-\end{aligned}
-$$
-
-[Learn more](https://sli.dev/features/latex)
-
----
-
-# Diagrams
-
-You can create diagrams / graphs from textual descriptions, directly in your Markdown.
-
-<div class="grid grid-cols-4 gap-5 pt-4 -mb-6">
-
-```mermaid {scale: 0.5, alt: 'A simple sequence diagram'}
-sequenceDiagram
-    Alice->John: Hello John, how are you?
-    Note over Alice,John: A typical interaction
-```
-
-```mermaid {theme: 'neutral', scale: 0.8}
-graph TD
-B[Text] --> C{Decision}
-C -->|One| D[Result 1]
-C -->|Two| E[Result 2]
-```
-
-```mermaid
-mindmap
-  root((mindmap))
-    Origins
-      Long history
-      ::icon(fa fa-book)
-      Popularisation
-        British popular psychology author Tony Buzan
-    Research
-      On effectiveness<br/>and features
-      On Automatic creation
-        Uses
-            Creative techniques
-            Strategic planning
-            Argument mapping
-    Tools
-      Pen and paper
-      Mermaid
-```
-
-```plantuml {scale: 0.7}
-@startuml
-
-package "Some Group" {
-  HTTP - [First Component]
-  [Another Component]
-}
-
-node "Other Groups" {
-  FTP - [Second Component]
-  [First Component] --> FTP
-}
-
-cloud {
-  [Example 1]
-}
-
-database "MySql" {
-  folder "This is my folder" {
-    [Folder 3]
-  }
-  frame "Foo" {
-    [Frame 4]
-  }
-}
-
-[Another Component] --> [Example 1]
-[Example 1] --> [Folder 3]
-[Folder 3] --> [Frame 4]
-
-@enduml
-```
-
-</div>
-
-Learn more: [Mermaid Diagrams](https://sli.dev/features/mermaid) and [PlantUML Diagrams](https://sli.dev/features/plantuml)
-
----
-foo: bar
-dragPos:
-  square: 691,32,167,_,-16
----
-
-# Draggable Elements
-
-Double-click on the draggable elements to edit their positions.
+## 2. 建立一個真正的 Server
 
 <br>
 
-###### Directive Usage
+- Json-server
+- 建立一個 HTTP 伺服器（通常跑在 localhost:3000）
+- 提供標準的 RESTful API 路由（例如 GET /posts、POST /comments）
+- 額外寫 script 讓 server 在啟動前端開發環境時一起啟動，額外佔用一個 port
 
-```md
-<img v-drag="'square'" src="https://sli.dev/logo.png">
-```
+<img src="./assets/imgs/gpt2.png" alt="gpt2" class="ml-auto mr-20 mt-10 w-40">
+
+---
+
+# 前端有哪些 mock 的方式
+
+## 3. Service Worker
 
 <br>
 
-###### Component Usage
+- 由瀏覽器提供的技術，主要用來提升網頁的性能、離線體驗和功能
+- 不用額外起一個 server，也不影響到依賴 network level 層級的工具
+- 同時支援 REST API 及 GraphQL
+- 可直接在 dev tools 內查看
 
-```md
-<v-drag text-3xl>
-  <div class="i-carbon:arrow-up" />
-  Use the `v-drag` component to have a draggable container!
-</v-drag>
-```
+<p class="text-4 text-gray-600">主要功能：
+離線訪問、網路請求攔截、推送通知、背景同步、資源預加載...</p>
+<p class="text-4 text-gray-600">實際應用：
+漸進式網頁應用（PWA）、Google Maps、新聞網站...</p>
 
-<v-drag pos="663,206,261,_,-15">
-  <div text-center text-3xl border border-main rounded>
-    Double-click me!
-  </div>
-</v-drag>
+<div class="flex h-40">
+<img src="./assets/imgs/ex4.png" alt="ex4" class="ml-70">
+<img src="./assets/imgs/ex3.png" alt="ex3" class="h-40 ml-auto">
+</div>
 
-<img v-drag="'square'" src="https://sli.dev/logo.png">
-
-###### Draggable Arrow
-
-```md
-<v-drag-arrow two-way />
-```
-
-<v-drag-arrow pos="67,452,253,46" two-way op70 />
-
----
-src: ./pages/imported-slides.md
-hide: false
----
+<!--
+- 運行在瀏覽器後台的 JavaScript 腳本，獨立於網頁的主線程運行
+- 核心概念是作為一個「中間人」，在網頁和網絡之間處理請求與響應
+- 透過 cache 的機制來打造離線體驗
+-->
 
 ---
 
-# Monaco Editor
+# Mock Service Worker
 
-Slidev provides built-in Monaco Editor support.
+##
 
-Add `{monaco}` to the code block to turn it into an editor:
+- 能在網路層（Network）發出實際的請求（Request）
+- 並透過 Service Worker 攔截，回傳已經定義好的資料內容
 
-```ts {monaco}
-import { ref } from 'vue'
-import { emptyArray } from './external'
-
-const arr = ref(emptyArray(10))
-```
-
-Use `{monaco-run}` to create an editor that can execute the code directly in the slide:
-
-```ts {monaco-run}
-import { version } from 'vue'
-import { emptyArray, sayHello } from './external'
-
-sayHello()
-console.log(`vue ${version}`)
-console.log(emptyArray<number>(10).reduce(fib => [...fib, fib.at(-1)! + fib.at(-2)!], [1, 1]))
-```
+<img src="./assets/imgs/ex5.png" alt="ex5" class="h-50 mt-20 ml-auto">
 
 ---
-layout: center
-class: text-center
+layout: two-cols
+---
+
+# Mock Service Worker
+
+## handlers.js
+
+[官網範例](https://mswjs.io/docs/basics/mocking-responses)
+
+::right::
+
+```js {all|2|5|7|none}
+// 1. Import the "HttpResponse" class from the library.
+import { http, HttpResponse } from "msw";
+
+export const handlers = [
+  http.get("/resource", () => {
+    // 2. Return a mocked "Response" instance from the handler.
+    return HttpResponse.text("Hello world!");
+  }),
+];
+```
+
+```js {all|4,5|none}
+export const handlers = [
+  http.get("/apples", () => {
+    return new HttpResponse(null, {
+      status: 404,
+      statusText: "Out Of Apples",
+    });
+  }),
+];
+```
+
+```js {all|2|4,5,6,7}
+export const handlers = [
+  http.post("/auth", () => {
+    return new HttpResponse(null, {
+      headers: {
+        "Set-Cookie": "mySecret=abc-123",
+        "X-Custom-Header": "yes",
+      },
+    });
+  }),
+];
+```
+
+<!--
+- mock logic 的核心
+
+[click] msw 提供的 api
+
+[click] http.get
+
+[click] response 一個字串
+
+[click]
+
+[click] 回傳 404
+
+[click]
+
+[click] http.post
+
+[click] 回傳客制 header
+-->
+
+---
+layout: two-cols
+---
+
+# Mock Service Worker
+
+## handlers.js
+
+行動辦公室實作 1
+
+::right::
+
+```js {all|3|8|9,10,11|16,17,18|20}
+import { http, HttpResponse, passthrough } from "msw";
+import { shouldUseRealApi } from "@/mocks/config";
+import { orders } from "../../orders/mockData";
+
+const apiPath = import.meta.env.VITE_API_URL + "/moffice/cafe/order";
+
+export const cafeOrderIdHandlers = [
+  http.get(`${apiPath}/:orderId`, ({ request, params }) => {
+    if (shouldUseRealApi(request.url)) {
+      return passthrough();
+    }
+
+    const orderId = parseInt(params.orderId);
+    const order = orders.find((o) => o.id === orderId);
+
+    if (!order) {
+      return HttpResponse.json("找不到此訂單", { status: 200 });
+    }
+
+    return HttpResponse.json(order);
+  }),
+];
+```
+
+<!--
+- mock logic 的核心
+
+[click] 引入 mockData，待會會講到
+
+[click] http.get
+
+[click] 有提供 api 可讓我們設計開關去控制要打真實的 api 還是用 mock
+
+[click] 如果沒找到回傳找不到
+
+[click] 有找到則回傳正常的資料
+-->
+
+---
+layout: two-cols
+---
+
+# Mock Service Worker
+
+## handlers.js
+
+行動辦公室實作 2
+
+::right::
+
+```js {all|8|16,17,18}
+import { http, HttpResponse, passthrough } from "msw";
+import { shouldUseRealApi } from "@/mocks/config";
+import { checkOrderAvailable } from "./mockData";
+
+const apiPath = import.meta.env.VITE_API_URL + "/moffice/cafe/available-order";
+
+export const cafeAvailableOrderHandlers = [
+  http.post(apiPath, async ({ request }) => {
+    if (shouldUseRealApi(request.url)) {
+      return passthrough();
+    }
+    const body = await request.json();
+
+    // 驗證請求內容是否為陣列
+    if (!Array.isArray(body)) {
+      return HttpResponse.json("Invalid request format. Expected an array.", {
+        status: 400,
+      });
+    }
+
+    const ordersResponse = checkOrderAvailable(body);
+
+    return HttpResponse.json(ordersResponse, { status: 200 });
+  }),
+];
+```
+
+<!--
+- mock logic 的核心
+
+[click] 上一個是 get，這裡也可以用 post
+
+[click] 可以自己控制回傳錯誤碼
+-->
+
+---
+layout: two-cols
+---
+
+# Mock Service Worker
+
+## mockData.js
+
+行動辦公室實作 1
+
+::right::
+
+```js
+export const menus = {
+  restaurant: [
+    {
+      type: "lunch",
+      title: "午餐專區",
+      icon: "/assets/icon/icon_lunch_title.svg",
+      info: "供應時段：12:00~13:00",
+      description:
+        " ．每日供應數種不同價格便當(0~130元)。\r\n ．特色菜依當日標價為主。\r\n ．水果：15元/1份。\r\n ．白飯：購買便當者免費。",
+      subTypeList: [
+        {
+          title: "02/04(周二)",
+          productList: [
+            {
+              id: 11780,
+              mtype: 1,
+              canOrder: 1,
+              supplyDate: "2025-02-11 12:00",
+              title: "叻唦麵",
+              price: 100,
+              preferences: [],
+              description: "配菜：日式蒸蛋 醋溜洋芋 蒜燒茄子 現炒時蔬",
+              label: "",
+              tag: "麵食",
+              isSugarAdjustable: null,
+            },
+          ],
+        },
+        {
+          title: "02/05(周三)",
+          productList: [
+            {
+              id: 11740,
+              mtype: 1,
+              canOrder: 1,
+              supplyDate: "2025-02-05 12:00",
+              title: "蝦蝦便當",
+              price: 85,
+              preferences: [],
+              description: "",
+              label: "",
+              tag: "便當",
+              isSugarAdjustable: null,
+            },
+            {
+              id: 11790,
+              mtype: 1,
+              canOrder: 1,
+              supplyDate: "2025-02-05 12:00",
+              title: "很好吃的便當",
+              price: 85,
+              preferences: [],
+              description: "",
+              label: "",
+              tag: "便當",
+              isSugarAdjustable: null,
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};
+```
+
+<!--
+- 所有 mockData 集中處，避免 handlers 過於冗長
+-->
+
+---
+
+# Mock Service Worker
+
+## 啟動成功後
+
+<div class="grid grid-cols-2 gap-10 mt-10">
+  <img src="./assets/imgs/ex6.png" alt="ex6">
+  <img src="./assets/imgs/ex7.png" alt="ex7">
+</div>
+
+---
+
+# Mock Service Worker
+
+## 優點
+
+<br>
+
+- 允許發出可以使用 DevTools 檢查的實際 HTTP 請求
+- 可模擬動態請求參數回應、網絡延遲、錯誤狀況等
+- 可以用於測試程式碼，不必為 HTTP 回應設定額外的測試模擬。
+- 跟許多框架、工具都有很好的整合性，像是 Vue、React、Jest、Cypress 等。
+- 針對主流的 API 設計－RESTful 和 GraphQL 都有良好的支援。
+- 不須特別設定就能直接使用 TypeScript，享受強型別帶來的便利與好處。
+- 清楚好閱讀的官方文件，並且有範例程式，讓開發者能好上手。
+
+---
+
+# Mock Service Worker
+
+## 專案效益：有沒有解決問題
+
+<br>
+
+- 一開始便可以寫完成的程式，不用修改 code
+- 想要模擬不同結果時只需要調整 handler 跟 mockData，不需要動到 code
+- 可以模擬不同 http 狀態例如 500、404
+- 可以先撰寫 api 檔測試
+
+---
+
+# 與其他模擬方法比較
+
+<br>
+
+| 方法                 | 優點                                                                                         | 缺點                                     |
+| -------------------- | -------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| Mock Service Worker  | 客戶端操作，無需獨立 server<br/>可模擬網絡行為<br/>易整合測試框架<br/>易於前端快速開發和測試 | 檔案較大<br/>複雜 API 還是需要寫邏輯     |
+| API 檔模擬假數據     | 簡單易用<br/>可模擬網絡行為<br/>維護成本低<br/>性能優秀                                      | 數據靜態<br/>無網路模擬行為<br/>真實性低 |
+| Mock Service Worker  | 客戶端操作，無需獨立 server<br/>可模擬網絡行為<br/>易整合測試框架<br/>易於前端快速開發和測試 | 檔案較大<br/>複雜 API 還是需要寫邏輯     |
+| Express 後端模擬數據 | 可提供完整功能<br/>高度靈活<br/>真實性高<br/>支持動態數據                                    | 設置較複雜<br/>需額外啟動伺服器          |
+
+<!--
+1. 客戶端網絡攔截：
+  - MSW：直接模擬 API 回應，而不依賴後端基礎設施。前端開發者可以在無後端的情況下快速模擬 API，尤其適合單獨開發前端或測試時使用。
+  - Express：必須運行一個服務器來處理請求。如果要模擬 API，需要啟動服務器並配置路由，無法直接在客戶端攔截請求。
+
+2. 整合前端測試框架：
+  - MSW：與 Jest、Cypress、Vitest 等測試框架深度整合，允許在測試中輕鬆模擬 API 回應。它能模擬真實的網絡行為（如延遲、錯誤）
+  - Express：需要在測試中啟動和管理服務器（例如使用 supertest）。這增加了測試設置的複雜度
+
+3. 零配置：
+  - MSW：提供簡單及多種的 API（如 rest.get() 或 graphql.query()）來定義模擬回應，無需搭建完整服務器。專注於快速模擬，減少設置時間。
+  - Express：需要手動定義路由、中間件和回應邏輯，設置過程較繁瑣。
+-->
+
+---
+
+# 未來展望
+
+<br>
+
+- 封裝 MSW 統一出口，方便未來調整或更換套件
+- 隨著專案發展，可進一步結合 MSW 與自動化測試管道
+- 根據實際需求，持續調整模擬策略，確保與真實 API 能夠無縫銜接
+- 持續探索各種可能性，選擇最適合專案的方法
+
 ---
 
 # Learn More
 
-[Documentation](https://sli.dev) · [GitHub](https://github.com/slidevjs/slidev) · [Showcases](https://sli.dev/resources/showcases)
+## [MSW](https://mswjs.io/docs/)
 
-<PoweredBySlidev mt-10 />
+<br>
+
+## [slidev](https://sli.dev)
