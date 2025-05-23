@@ -3,7 +3,7 @@
 theme: seriph
 # random image from a curated Unsplash collection by Anthony
 # like them? see https://unsplash.com/collections/94734566/slidev
-background: "#aef5ff"
+background: "ffffff"
 # some information about your slides (markdown enabled)
 title: Welcome to Slidev
 info: |
@@ -25,521 +25,425 @@ mdc: true
 #  ogImage: https://cover.sli.dev
 ---
 
-# Mock Service Worker
-
-<img src="./assets/imgs/logo.png" alt="logo" class="mx-auto w-25 mt-10">
+# AI 使用分享
 
 ---
 transition: slide-left
 ---
 
-# 什麼是 Mock Service Worker (MSW)
+# Agenda
 
-Mock Service Worker 是一個 API 模擬庫，它允許你編寫與客戶端無關的模擬，並在任何框架、工具和環境中重複使用它們。
-
-- 用於瀏覽器和 Node.js 的 API 模擬函式庫。
-- 可以攔截傳出的請求、觀察它們並使用模擬回應。
-  <br>
-  <br>
-
-<!--
-You can have `style` tag in markdown to override the style for the current page.
-Learn more: https://sli.dev/features/slide-scope-style
--->
-
-<style>
-h1 {
-  background-color: #2B90B6;
-  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
-  background-size: 100%;
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -moz-text-fill-color: transparent;
-}
-</style>
-
----
-transition: slide-left
----
-
-# 為什麼有模擬 API 的需求
-
-## 前後端分離
-
-|                                                         |
-| ------------------------------------------------------- |
-| 後端 API 正在開發中，前端想要同時開發                   |
-| 前端想要測試 API 回傳不同結果下，元件的操作邏輯是否正常 |
-
-<img src="./assets/imgs/gpt4.png" alt="gpt4" class="ml-auto mr-20 mt-10 w-60">
+<ul>
+  <li class="text-28px">Cursor Rules</li>
+  <li class="text-28px">Commit Message</li>
+  <li class="text-28px">README</li>
+  <li class="text-28px">人類工程師介入</li>
+  <li class="text-28px">Atlassian HULA 簡介</li>
+  <li class="text-28px">日常使用</li>
+</ul>
 
 ---
 layout: two-cols
 transition: slide-left
 ---
 
-# 為什麼有模擬 API 的需求
+# Cursor Rules
 
-##
-
-<div class="mt-20">
-  <p class="text-6">串接的程式先註解</p>
-  </div>
-  <arrow x1="270" y1="180" x2="480" y2="220" color="#953" width="2" arrowSize="1" />
-<div class="mt-20">
-    <p class="text-6">在 api 檔先回傳假資料</p>
-  </div>
-  <arrow x1="300" y1="280" x2="480" y2="320" color="#953" width="2" arrowSize="1" />
+<ul>
+  <li class="text-24px font-bold">cursor-rules.mdc</li>
+  <li class="text-24px font-bold">
+    guideline
+    <ul class="text-20px font-400">
+      <li>git commit</li>
+      <li>jsdoc</li>
+      <li>testing</li>
+      <li>vue</li>
+    </ul>
+  </li>
+  <li class="text-24px font-bold">
+    project
+    <ul class="text-20px font-400">
+      <li>api</li>
+      <li>prompt</li>
+    </ul>
+  </li>
+</ul>
 
 ::right::
 
-<img src="./assets/imgs/ex1.png" alt="ex1">
+<img src="./assets/imgs/cursor-rules.png" alt="ex1">
 
 ---
 
-# 為什麼有模擬 API 的需求
+# README
 
-## 寫死假資料可能會有什麼問題
+##
 
 <br>
 
-- 需要對 code 頻繁修改，串接時還需要回去改 api 串接檔
-- 想要模擬不同結果時需要一直回去改假資料
-- 無法模擬 api 狀態錯誤例如：500
-- 不能先撰寫測試
+<ul class="text-28px">
+  <li>mockHandler</li>
+  <li>errorTracker</li>
+</ul>
 
-<img src="./assets/imgs/gpt3.png" alt="gpt3" class="ml-auto mr-20 w-60">
+<img src="./assets/imgs/readme.png" alt="gpt3" class="ml-auto mr-20 w-60">
 
 ---
 level: 2
 ---
 
-# 為什麼有模擬 API 的需求
-
-## 如果 Mock API
+# 人類工程師介入仍很重要
 
 <br>
 
-- 模擬動態回應以提升開發效率，程式運作更符合實際預期
-- 模擬各種網路狀況（延遲、錯誤、特殊 HTTP 狀態等）
-- 藉由修改 mock 的內容，幫助元件或頁面進行除錯。可以模擬如果 API 壞掉的情境
-- 測試可以撰寫各種 HTTP 狀態，或是不同回應資料時的測試案例
-- 前後端雙方也能透過 Mock API 的過程更具體討論實作細節
+### AI 代理定義：可以在不用人類介入的狀況下，根據指定目標，去完成相關任務
 
-<img src="./assets/imgs/ex2.png" alt="ex2" class="h-50 ml-auto mt-6">
+<br>
 
-<!--
-- 模擬動態回應以提升開發效率，並使程式運作更符合實際預期
-- 依專案需要可模擬各種網絡狀況（延遲、錯誤、特殊 HTTP 狀態等）
-- 藉由修改 mock 的內容，幫助元件或頁面進行除錯。可以模擬如果 API 壞掉
-- 進行測試時，可以撰寫各種 HTTP 狀態，或是不同回應資料時的測試案例
-- 前後端雙方也能透過 Mock API 的過程更具體討論實作細節
--->
+### 相比於完全沒有人類介入的狀況，適時的人類工程師介入 (human-in-the-loop)，往往能夠獲得更好的成果
+
+<img src="./assets/imgs/ExplainThis.png" alt="ex2" class="h-20 ml-auto mt-45">
 
 ---
 
-# 前端有哪些 mock 的方式
-
-## 1. 攔截 Request 請求
+# 人類工程師介入仍很重要
 
 <br>
 
-- 可用套件：Mock.js、axios-mock-adapter
-- 透過攔截 XMLHttpRequest 並覆寫相關方法來達成 Mock 資料回傳。
-- 沒有實際進行真正的網路傳輸
-- 只要是依賴 XMLHttpRequest 方法的套件、工具都不能正常運作
+#### Devin 的創辦人兼執行長 Scott Wu：
 
-<img src="./assets/imgs/gpt1.png" alt="gpt1" class="ml-auto mr-20 w-50">
+<br>
+
+> 要把任務委派給 AI 代理，不會是一次性的過程 (not a single-shot process)
+
+<br>
+
+- 「全球首個 AI 軟體工程師」- 能夠在人類指定目標後，就自動運行直到發出一個解決方案的 PR (pull request)
+- 2025 年 Devin 進一步推出 2.0 時，從原本全自動化，轉為人機共同協作
+
+<br>
+
+<img src="./assets/imgs/scott.png" alt="gpt1" class="ml-auto mr-20 w-80">
 
 ---
 
-# 前端有哪些 mock 的方式
+# 釐清好問題
 
-## 2. 建立一個真正的 Server
+#### Cursor 團隊的工程師 Adam Hofmann：
 
 <br>
 
-- Json-server
-- 建立一個 HTTP 伺服器（通常跑在 localhost:3000）
-- 提供標準的 RESTful API 路由（例如 GET /posts、POST /comments）
-- 額外寫 script 讓 server 在啟動前端開發環境時一起啟動，額外佔用一個 port
+> 「在你足夠理解問題以及你想要的解決方案前，不要叫 AI 代理幫你做事」
 
-<img src="./assets/imgs/gpt2.png" alt="gpt2" class="ml-auto mr-20 mt-10 w-40">
+> 「don’t ask agent to do something until you understand the problem and solution that you want to see. 」
+
+<br>
+
+- 釐清問題這件事本身，也可以運用 AI 來協助（例如可以寫下你目前對問題的理解，然後問 AI 是否還有遺漏沒有想清楚的面向、或者問能否點出潛在的假設漏洞）
+- 撰文者特別推薦，在問題釐清階段可以使用推理模型
+
+<img src="./assets/imgs/adam.png" alt="gpt1" class="ml-auto mr-10 w-90">
 
 ---
 
-# 前端有哪些 mock 的方式
-
-## 3. Service Worker
+# 建置好讓 AI 能夠成功完成任務的基礎
 
 <br>
 
-- 由瀏覽器提供的技術，主要用來提升網頁的性能、離線體驗和功能
-- 不用額外起一個 server，也不影響到依賴 network level 層級的工具
-- 同時支援 REST API 及 GraphQL
-- 可直接在 dev tools 內查看
+> 假如今天一個剛加入團隊的新成員，即使這位新成員很聰明，但假如該成員不知道團隊的程式碼庫風格、不能使用團隊平常有在用的工具，這位成員可能如預期發揮自己百分百的水準嗎?
 
-<p class="text-4 text-gray-600">主要功能：
-離線訪問、網路請求攔截、推送通知、背景同步、資源預加載...</p>
-<p class="text-4 text-gray-600">實際應用：
-漸進式網頁應用（PWA）、Google Maps、新聞網站...</p>
+<br>
 
-<div class="flex h-40">
-<img src="./assets/imgs/ex4.png" alt="ex4" class="ml-70">
-<img src="./assets/imgs/ex3.png" alt="ex3" class="h-40 ml-auto">
+- 團隊程式碼庫風格指南 (style guide)
+  - <div class="text-orange-600">風格一致的程式碼</div>
+- 過去不同功能的設計文件 (design doc)
+  - <div class="text-orange-600">先理解原本的設計脈絡，進而讓程式碼更符合設計初衷</div>
+- 靜態檢查工具 (例如 linter)
+  - <div class="text-orange-600">生成出的程式碼更符合團隊的規範</div>
+
+讓 AI 更精準地完成我們期望 AI 完成的任務，這樣將能夠有效減少後續人類的介入與改動。
+
+---
+
+# 建置好讓 AI 能夠成功完成任務的基礎
+
+<br>
+
+#### 在執行任務時會用到的外部工具 (MCP)
+
+<p class="text-gray-600">提供 Jira 的 MCP，Cursor 就能自動從 Jira 中抓取相關規格或需求描述，工程師甚至不需要手動輸入需求，只需告訴 Cursor「根據 Jira 的某張 ticket 來實作功能」，即可完成任務。</p>
+
+---
+
+# 任務拆小 + 適時給予回饋
+
+<br>
+
+<ul class="text-20px">
+  <li>對比起從頭到尾的全自動化，目前業界摸索出比較有效的方式，是人與 AI 的共同協作</li>
+  <li>把任務拆小，讓 AI 能夠去執行不同的子任務，並在子任務的進行途中持續給予回饋</li>
+</ul>
+
+<br>
+<br>
+
+#### Atlassian 研究 <a href="https://arxiv.org/abs/2411.12924">《Human-In-the-Loop Software Development Agents》</a>
+
+<p>把完整開發流程拆成四個階段，每個階段都由人類工程師的指示搭配 AI 代理去完成</p>
+<p>他們的研究發現，比起一次要求 AI 完成完整的任務，這種拆小的方式，得出來的品質比較好</p>
+
+---
+
+# HULA (Human-in-the-Loop LLM-based Agents Framework)
+
+## HULA 是什麼？
+
+<br>
+
+<ul>
+  <li>結合大型語言模型 (LLMs) 和軟體工程師人工介入的框架</li>
+  <li>目標是輔助軟體開發任務，例如從 JIRA 問題自動產生程式碼</li>
+  <li>不是要完全取代人工，而是希望促進人機協作 (Human-AI synergy)</li>
+  <li>框架被設計、實作並整合到 Atlassian JIRA 中供內部使用</li>
+</ul>
+
+  <img src="./assets/imgs/atla.jpg" alt="gpt1" class="mx-auto w-100">
+
+---
+
+# HULA (Human-in-the-Loop LLM-based Agents Framework)
+
+<br>
+
+<img src="./assets/imgs/HULA2.png" alt="gpt1" class="mx-auto w-200">
+
+---
+
+# HULA 如何運作？
+
+<div class="flex gap-20">
+<div>
+  <h4 class="text-blue-600">三種「代理人」(Agents)</h4>
+  <ul>
+    <li>AI 規劃代理人 (AI Planner Agent)</li>
+    <li>AI 程式代理人 (AI Coding Agent) </li>
+    <li>人類代理人 (Human Agent) (也就是軟體工程師)</li>
+  </ul>
+</div>
+<div>
+  <h4 class="text-blue-600">四個階段</h4> 
+  <ul>
+    <li>設定任務 (Setting up a task)</li>
+    <li>規劃 (Planning)</li>
+    <li>編碼 (Coding)</li>
+    <li>提出 PR (Raising a Pull Request)</li>
+  </ul>
+</div>
 </div>
 
-<!--
-- 運行在瀏覽器後台的 JavaScript 腳本，獨立於網頁的主線程運行
-- 核心概念是作為一個「中間人」，在網頁和網絡之間處理請求與響應
-- 透過 cache 的機制來打造離線體驗
--->
+<br>
+
+<img src="./assets/imgs/HULA1.png" alt="gpt1" class="mx-auto w-180">
 
 ---
-
-# Mock Service Worker
-
-##
-
-- 能在網路層（Network）發出實際的請求（Request）
-- 並透過 Service Worker 攔截，回傳已經定義好的資料內容
-
-<img src="./assets/imgs/ex5.png" alt="ex5" class="h-50 mt-20 ml-auto">
-
----
-layout: two-cols
+transition: slide-left
 ---
 
-# Mock Service Worker
+# HULA 評估與成果
 
-## handlers.js
+進行了多階段評估：離線評估、線上評估和使用者問卷調查。
 
-[官網範例](https://mswjs.io/docs/basics/mocking-responses)
+<div class="flex gap-12">
 
-::right::
+<div>
+<p class="text-green-600">離線評估（用資料集）</p>
+<table class="text-14px bg-gray-200">
+  <thead>
+    <tr>
+      <th>指標</th>
+      <th>SWE-bench 驗證</th>
+      <th>內部</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>成功產生計畫的議題百分比</td>
+      <td>97%</td>
+      <td>100%</td>
+    </tr>
+    <tr>
+      <td>檔案定位召回率</td>
+      <td>86%</td>
+      <td>30%</td>
+    </tr>
+    <tr>
+      <td>完美檔案定位的議題百分比</td>
+      <td>84%</td>
+      <td>15%</td>
+    </tr>
+    <tr>
+      <td>完美通過測試案例的議題百分比</td>
+      <td>31%</td>
+      <td>–</td>
+    </tr>
+    <tr>
+      <td>高程式碼相似度的議題百分比</td>
+      <td>45%</td>
+      <td>30%</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
-```js {all|2|5|7|none}
-// 1. Import the "HttpResponse" class from the library.
-import { http, HttpResponse } from "msw";
-
-export const handlers = [
-  http.get("/resource", () => {
-    // 2. Return a mocked "Response" instance from the handler.
-    return HttpResponse.text("Hello world!");
-  }),
-];
-```
-
-```js {all|4,5|none}
-export const handlers = [
-  http.get("/apples", () => {
-    return new HttpResponse(null, {
-      status: 404,
-      statusText: "Out Of Apples",
-    });
-  }),
-];
-```
-
-```js {all|2|4,5,6,7}
-export const handlers = [
-  http.post("/auth", () => {
-    return new HttpResponse(null, {
-      headers: {
-        "Set-Cookie": "mySecret=abc-123",
-        "X-Custom-Header": "yes",
-      },
-    });
-  }),
-];
-```
-
-<!--
-- mock logic 的核心
-
-[click] msw 提供的 api
-
-[click] http.get
-
-[click] response 一個字串
-
-[click]
-
-[click] 回傳 404
-
-[click]
-
-[click] http.post
-
-[click] 回傳客制 header
--->
-
----
-layout: two-cols
----
-
-# Mock Service Worker
-
-## handlers.js
-
-行動辦公室實作 1
-
-::right::
-
-```js {all|3|8|9,10,11|16,17,18|20}
-import { http, HttpResponse, passthrough } from "msw";
-import { shouldUseRealApi } from "@/mocks/config";
-import { orders } from "../../orders/mockData";
-
-const apiPath = import.meta.env.VITE_API_URL + "/moffice/cafe/order";
-
-export const cafeOrderIdHandlers = [
-  http.get(`${apiPath}/:orderId`, ({ request, params }) => {
-    if (shouldUseRealApi(request.url)) {
-      return passthrough();
-    }
-
-    const orderId = parseInt(params.orderId);
-    const order = orders.find((o) => o.id === orderId);
-
-    if (!order) {
-      return HttpResponse.json("找不到此訂單", { status: 200 });
-    }
-
-    return HttpResponse.json(order);
-  }),
-];
-```
-
-<!--
-- mock logic 的核心
-
-[click] 引入 mockData，待會會講到
-
-[click] http.get
-
-[click] 有提供 api 可讓我們設計開關去控制要打真實的 api 還是用 mock
-
-[click] 如果沒找到回傳找不到
-
-[click] 有找到則回傳正常的資料
--->
-
----
-layout: two-cols
----
-
-# Mock Service Worker
-
-## handlers.js
-
-行動辦公室實作 2
-
-::right::
-
-```js {all|8|16,17,18}
-import { http, HttpResponse, passthrough } from "msw";
-import { shouldUseRealApi } from "@/mocks/config";
-import { checkOrderAvailable } from "./mockData";
-
-const apiPath = import.meta.env.VITE_API_URL + "/moffice/cafe/available-order";
-
-export const cafeAvailableOrderHandlers = [
-  http.post(apiPath, async ({ request }) => {
-    if (shouldUseRealApi(request.url)) {
-      return passthrough();
-    }
-    const body = await request.json();
-
-    // 驗證請求內容是否為陣列
-    if (!Array.isArray(body)) {
-      return HttpResponse.json("Invalid request format. Expected an array.", {
-        status: 400,
-      });
-    }
-
-    const ordersResponse = checkOrderAvailable(body);
-
-    return HttpResponse.json(ordersResponse, { status: 200 });
-  }),
-];
-```
-
-<!--
-- mock logic 的核心
-
-[click] 上一個是 get，這裡也可以用 post
-
-[click] 可以自己控制回傳錯誤碼
--->
-
----
-layout: two-cols
----
-
-# Mock Service Worker
-
-## mockData.js
-
-行動辦公室實作 1
-
-::right::
-
-```js
-export const menus = {
-  restaurant: [
-    {
-      type: "lunch",
-      title: "午餐專區",
-      icon: "/assets/icon/icon_lunch_title.svg",
-      info: "供應時段：12:00~13:00",
-      description:
-        " ．每日供應數種不同價格便當(0~130元)。\r\n ．特色菜依當日標價為主。\r\n ．水果：15元/1份。\r\n ．白飯：購買便當者免費。",
-      subTypeList: [
-        {
-          title: "02/04(周二)",
-          productList: [
-            {
-              id: 11780,
-              mtype: 1,
-              canOrder: 1,
-              supplyDate: "2025-02-11 12:00",
-              title: "叻唦麵",
-              price: 100,
-              preferences: [],
-              description: "配菜：日式蒸蛋 醋溜洋芋 蒜燒茄子 現炒時蔬",
-              label: "",
-              tag: "麵食",
-              isSugarAdjustable: null,
-            },
-          ],
-        },
-        {
-          title: "02/05(周三)",
-          productList: [
-            {
-              id: 11740,
-              mtype: 1,
-              canOrder: 1,
-              supplyDate: "2025-02-05 12:00",
-              title: "蝦蝦便當",
-              price: 85,
-              preferences: [],
-              description: "",
-              label: "",
-              tag: "便當",
-              isSugarAdjustable: null,
-            },
-            {
-              id: 11790,
-              mtype: 1,
-              canOrder: 1,
-              supplyDate: "2025-02-05 12:00",
-              title: "很好吃的便當",
-              price: 85,
-              preferences: [],
-              description: "",
-              label: "",
-              tag: "便當",
-              isSugarAdjustable: null,
-            },
-          ],
-        },
-      ],
-    },
-  ],
-};
-```
-
-<!--
-- 所有 mockData 集中處，避免 handlers 過於冗長
--->
-
----
-
-# Mock Service Worker
-
-## 啟動成功後
-
-<div class="grid grid-cols-2 gap-10 mt-10">
-  <img src="./assets/imgs/ex6.png" alt="ex6">
-  <img src="./assets/imgs/ex7.png" alt="ex7">
+<div>
+  <p class="text-green-600">線上評估（實際使用）</p>
+  <img src="./assets/imgs/HULA3.png" alt="gpt1" class="mx-auto w-100">
+</div>
 </div>
 
 ---
 
-# Mock Service Worker
-
-## 優點
+# HULA 重要啟示
 
 <br>
 
-- 允許發出可以使用 DevTools 檢查的實際 HTTP 請求
-- 可模擬動態請求參數回應、網絡延遲、錯誤狀況等
-- 可以用於測試程式碼，不必為 HTTP 回應設定額外的測試模擬。
-- 跟許多框架、工具都有很好的整合性，像是 Vue、React、Jest、Cypress 等。
-- 針對主流的 API 設計－RESTful 和 GraphQL 都有良好的支援。
-- 不須特別設定就能直接使用 TypeScript，享受強型別帶來的便利與好處。
-- 清楚好閱讀的官方文件，並且有範例程式，讓開發者能好上手。
+<ul class="text-24px">
+  <li>輸入資訊的細節程度對 LLMs 代理人的表現影響很大</li>
+  <li>核心是「人工介入」(Human-in-the-loop)：<span class="text-orange-600">人工回饋</span>的重要性，在流程的每個階段都允許工程師提供回饋和指導。</li>
+  <li>人機協作，<span class="text-red-500">1+1＞2</span></li>
+</ul>
 
 ---
 
-# Mock Service Worker
+# 日常使用
 
-## 專案效益：有沒有解決問題
+<div class="flex gap-20">
+  <div>
+
+  <p class="font-bold">釐清好問題</p>
+
+  <ul>
+    <li>GPT o3</li>
+    <li>Grok thinking</li>
+    <li>Gemini 2.5 flash</li>
+    <li>Cursor Agent + Claude-3.7-Sonnet</li>
+    <li>NotebookLM</li>
+  </ul>
+  </div>
+  <div>
+
+  <p class="font-bold">建置好讓 AI 能夠成功完成任務的基礎</p>
+
+  <ul>
+    <li>Cursor Rules</li>
+    <li>Docs</li>
+    <li>MCP</li>
+    <li>README</li>
+  </ul>
+
+  </div>
+</div>
 
 <br>
 
-- 一開始便可以寫完成的程式，不用修改 code
-- 想要模擬不同結果時只需要調整 handler 跟 mockData，不需要動到 code
-- 可以模擬不同 http 狀態例如 500、404
-- 可以先撰寫 api 檔測試
+<div>
+  <p class="font-bold">任務拆小 + 適時給予回饋</p>
+  <ul>
+    <li>分次給任務，一次約 1~5 個小任務</li>
+  </ul>
+</div>
 
 ---
 
-# 與其他模擬方法比較
+# 日常使用
 
 <br>
 
-| 方法                 | 優點                                                                                         | 缺點                                     |
-| -------------------- | -------------------------------------------------------------------------------------------- | ---------------------------------------- |
-| Mock Service Worker  | 客戶端操作，無需獨立 server<br/>可模擬網絡行為<br/>易整合測試框架<br/>易於前端快速開發和測試 | 檔案較大<br/>複雜 API 還是需要寫邏輯     |
-| API 檔模擬假數據     | 簡單易用<br/>可模擬網絡行為<br/>維護成本低<br/>性能優秀                                      | 數據靜態<br/>無網路模擬行為<br/>真實性低 |
-| Mock Service Worker  | 客戶端操作，無需獨立 server<br/>可模擬網絡行為<br/>易整合測試框架<br/>易於前端快速開發和測試 | 檔案較大<br/>複雜 API 還是需要寫邏輯     |
-| Express 後端模擬數據 | 可提供完整功能<br/>高度靈活<br/>真實性高<br/>支持動態數據                                    | 設置較複雜<br/>需額外啟動伺服器          |
+<div class="text-20px">
+  <h4>最常用提示詞</h4>
+  <ul class="mt-2">
+    <li>幫我實作...功能</li>
+    <li>跟我解釋這段</li>
+    <li class="text-orange-600">調整成可讀性較高的寫法</li>
+  </ul>
+</div>
+<div class="text-20px mt-10">
+  <h4>其他工具</h4>
+  <ul>
+    <li>Gamma</li>
+    <li>Felo</li>
+    <li>Perplxity</li>
+  </ul>
+</div>
 
-<!--
-1. 客戶端網絡攔截：
-  - MSW：直接模擬 API 回應，而不依賴後端基礎設施。前端開發者可以在無後端的情況下快速模擬 API，尤其適合單獨開發前端或測試時使用。
-  - Express：必須運行一個服務器來處理請求。如果要模擬 API，需要啟動服務器並配置路由，無法直接在客戶端攔截請求。
+---
+layout: two-cols
+---
 
-2. 整合前端測試框架：
-  - MSW：與 Jest、Cypress、Vitest 等測試框架深度整合，允許在測試中輕鬆模擬 API 回應。它能模擬真實的網絡行為（如延遲、錯誤）
-  - Express：需要在測試中啟動和管理服務器（例如使用 supertest）。這增加了測試設置的複雜度
+# 日常使用
 
-3. 零配置：
-  - MSW：提供簡單及多種的 API（如 rest.get() 或 graphql.query()）來定義模擬回應，無需搭建完整服務器。專注於快速模擬，減少設置時間。
-  - Express：需要手動定義路由、中間件和回應邏輯，設置過程較繁瑣。
--->
+<h2>AI 資訊獲取</h2>
+
+<br>
+
+<div class="flex gap-20">
+  <div>
+    <h4>技術類</h4>
+    <ul>
+      <li>iHower</li>
+      <li>保哥</li>
+      <li>尹相治</li>
+      <li>高見龍</li>
+      <li>莫力全</li>
+      <li>harryspeaks</li>
+    </ul>
+  </div>
+  <div>
+    <h4>財經類</h4>
+    <ul>
+      <li>股癌</li>
+      <li>曼尼</li>
+      <li>IEObserve</li>
+      <li>李柏鋒</li>
+      <li>M 觀點</li>
+    </ul>
+  </div>
+</div>
+
+::right::
+
+  <div>
+    <div
+  class="grid grid-cols-3 gap-6
+         [&>img:nth-child(3n+1)]:mt-4
+         [&>img:nth-child(3n+2)]:mt-8
+         [&>img:nth-child(3n)]:mt-0"
+>
+  <img src="./assets/imgs/ava1.png"  alt="gpt1"  class="mx-auto w-20">
+  <img src="./assets/imgs/ava2.png"  alt="gpt2"  class="mx-auto w-20">
+  <img src="./assets/imgs/ava3.png"  alt="gpt3"  class="mx-auto w-20">
+  <img src="./assets/imgs/ava4.png"  alt="gpt4"  class="mx-auto w-20">
+  <img src="./assets/imgs/ava5.png"  alt="gpt5"  class="mx-auto w-20">
+  <img src="./assets/imgs/ava6.png"  alt="gpt6"  class="mx-auto w-20">
+  <img src="./assets/imgs/ava7.png"  alt="gpt7"  class="mx-auto w-20">
+  <img src="./assets/imgs/ava8.png"  alt="gpt8"  class="mx-auto w-20">
+  <img src="./assets/imgs/ava9.png"  alt="gpt9"  class="mx-auto w-20">
+  <img src="./assets/imgs/ava10.png" alt="gpt10" class="mx-auto w-20">
+  <img src="./assets/imgs/ava11.png" alt="gpt11" class="mx-auto w-20">
+</div>
+
+  </div>
 
 ---
 
-# 未來展望
+# 本日大事
 
-<br>
+## Claude 4 推出
 
-- 封裝 MSW 統一出口，方便未來調整或更換套件
-- 隨著專案發展，可進一步結合 MSW 與自動化測試管道
-- 根據實際需求，持續調整模擬策略，確保與真實 API 能夠無縫銜接
-- 持續探索各種可能性，選擇最適合專案的方法
+## 灰狼 v.s 雷霆
 
 ---
 
-# Learn More
+# 本日大事
 
-## [MSW](https://mswjs.io/docs/)
-
-<br>
-
-## [slidev](https://sli.dev)
+## 今天禮拜五 TGIF
