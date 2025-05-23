@@ -35,8 +35,7 @@ transition: slide-left
 
 <ul>
   <li class="text-28px">Cursor Rules</li>
-  <li class="text-28px">Commit Message</li>
-  <li class="text-28px">README</li>
+  <li class="text-28px">README & Docs</li>
   <li class="text-28px">人類工程師介入</li>
   <li class="text-28px">Atlassian HULA 簡介</li>
   <li class="text-28px">日常使用</li>
@@ -75,7 +74,7 @@ transition: slide-left
 
 ---
 
-# README
+# README & Docs
 
 ##
 
@@ -87,6 +86,10 @@ transition: slide-left
 </ul>
 
 <img src="./assets/imgs/readme.png" alt="gpt3" class="ml-auto mr-20 w-60">
+
+<ul class="text-28px mt-20">
+  <li>Docs</li>
+</ul>
 
 ---
 level: 2
